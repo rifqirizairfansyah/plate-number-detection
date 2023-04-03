@@ -1,0 +1,13 @@
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 14
+names: ['0', 'Bangku', 'Human', 'Jakarta', 'Kota Padang', 'Mobil', 'Motor', 'Pekanbaru Riau', 'Plat Kendaraan', 'Tangan', 'plat', 'plat-nomor', 'platNomor', 'plate']
+
+roboflow:
+  workspace: ranias-workspace
+  project: dataset-plat-nomor
+  version: 5
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/ranias-workspace/dataset-plat-nomor/dataset/5
