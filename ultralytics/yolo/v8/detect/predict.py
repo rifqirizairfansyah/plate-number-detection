@@ -41,11 +41,12 @@ def validate_license_plate(license_plate):
 
 def ocr_image(img,coordinates):
     x,y,w, h = int(coordinates[0]), int(coordinates[1]), int(coordinates[2]),int(coordinates[3])
-    
+    print(img[y:h, x:w])
     cx=int(x+w)//2
     cy=int(y+h)//2
     # cv2.circle(img, (cx, cy), 3, (255,0,0), 15)
     img = img[y:h,x:w]
+    print(img)
     # Start coordinate, here (5, 5)
     # represents the top left corner of rectangle
     inDetectionPlane = cv2.pointPolygonTest(np.array(area, np.int32), ((cx, cy)), False)
@@ -95,7 +96,7 @@ class DetectionPredictor(BasePredictor):
                                         max_det=self.args.max_det)
 
         for i, pred in enumerate(preds):
-            # shape = orig_img[i].shape if self.webcam else orig_img.shape
+            shape = orig_img[i].shape if self.source_type.webcam else orig_img.shape
             shape = orig_img[i].shape
             pred[:, :4] = ops.scale_boxes(img.shape[2:], pred[:, :4], shape).round()
 
@@ -108,11 +109,11 @@ class DetectionPredictor(BasePredictor):
             im = im[None]  # expand for batch dim
         self.seen += 1
         im0 = im0.copy()
-        # if self.webcam:  # batch_size >= 1
-        log_string += f'{idx}: '
-        frame = self.dataset.count
-        # else:
-        # frame = getattr(self.dataset, 'frame', 0)
+        if self.source_type.webcam or self.source_type.from_img:  # batch_size >= 1
+            log_string += f'{idx}: '
+            frame = self.dataset.count
+        else:
+            frame = getattr(self.dataset, 'frame', 0)
 
         self.data_path = p
         

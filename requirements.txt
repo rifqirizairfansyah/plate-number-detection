@@ -1,11 +1,11 @@
 # Ultralytics requirements
 # Usage: pip install -r requirements.txt
-ultralytics>=8.0.32 atau 8.0.58, default 8.0.3
+ultralytics>=8.0.58
 # Base ----------------------------------------
 hydra-core>=1.2.0
 matplotlib>=3.2.2
 numpy>=1.18.5
-#opencv-python>=4.1.1 / 4.7.0
+opencv-python>=4.7.0
 # opencv-python --upgrade
 Pillow>=7.1.2
 PyYAML>=5.3.1
